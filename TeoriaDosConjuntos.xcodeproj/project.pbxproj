@@ -25,6 +25,8 @@
 /* Begin PBXFileReference section */
 		ACD067D71DCA511000646772 /* TeoriaDosConjuntos */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TeoriaDosConjuntos; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACD067DA1DCA511000646772 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		ACD068121DCA950400646772 /* mackenzie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mackenzie.png; sourceTree = "<group>"; };
+		ACD068131DCA950400646772 /* SOIL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOIL.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,8 @@
 			isa = PBXGroup;
 			children = (
 				ACD067DA1DCA511000646772 /* main.c */,
+				ACD068121DCA950400646772 /* mackenzie.png */,
+				ACD068131DCA950400646772 /* SOIL.h */,
 			);
 			path = TeoriaDosConjuntos;
 			sourceTree = "<group>";
@@ -216,6 +220,7 @@
 		ACD067DF1DCA511000646772 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -223,6 +228,7 @@
 		ACD067E01DCA511000646772 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
