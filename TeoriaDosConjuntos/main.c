@@ -24,7 +24,14 @@
 #include <GL/glu.h>
 #include <GL/glut.h>
 #include <stdio.h>
+#include "SOIL.h"
 #endif
+
+
+
+#define MAX_NO_TEXTURES 1
+
+GLuint texture_id[MAX_NO_TEXTURES]; // vetor com os números das texturas
 
 GLfloat luzAmbiente[4]={0.2,0.2,0.2,1.0};
 GLfloat luzDifusa[4]={0.7,0.7,0.7,1.0}; // "cor"
@@ -443,6 +450,29 @@ void initGL() {
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glEnable(GL_DEPTH_TEST);
+    
+    // Definir a forma de armazenamento dos pixels na textura (1= alinhamento por byte)
+    glPixelStorei ( GL_UNPACK_ALIGNMENT, 1 );
+    
+    // Definir quantas texturas serão usadas no programa
+    glGenTextures (1, texture_id);  // 1 = uma textura;
+    // texture_id = vetor que guarda os números das texturas
+    
+#ifdef __APPLE__
+#else
+#ifdef _WIN32
+#endif
+    // Carrega um arquivo de imagem diretamente como uma nova textura OpenGL
+    texture_id[0] = SOIL_load_OGL_texture(
+                                          "mackenzie.png",
+                                          SOIL_LOAD_AUTO,
+                                          SOIL_CREATE_NEW_ID,
+                                          SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+                                          );
+#endif
+    
+    
+    glBindTexture(GL_TEXTURE_2D, texture_id[0]);
 }
 
 void reshape(GLsizei width, GLsizei height) {
@@ -462,19 +492,19 @@ void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     
     displayTorus1();
+    glEnable(GL_TEXTURE_2D);
     displayTeapot1();
+    glDisable(GL_TEXTURE_2D);
     displaySphere1();
     displayCone1();
+    glEnable(GL_TEXTURE_2D);
     displayTeapot2();
+    glDisable(GL_TEXTURE_2D);
     displaySphere2();
-    
     drawRetangle1();
-    
     drawRetangle2();
-    
     displayCone2();
     displayTorus2();
-    
     drawInt();
     drawUni();
     
@@ -487,7 +517,7 @@ void display() {
     glFlush();
     glutSwapBuffers();
     
-    angle -= 3.f;
+    angle -= .5f;
 }
 
 void keyboard(unsigned char key, int x, int y) {
